@@ -1,0 +1,32 @@
+manifestVersion: 1
+id: joeri-store-evcc
+name: EVCC
+category: vehicles
+version: "0.316.0"
+tagline: EV charge controller & solar charging optimizer
+description: >-
+  EVCC is an open-source EV charge controller and energy management system.
+  It optimizes electric vehicle charging with solar energy, dynamically
+  adjusting charging power based on solar surplus, grid price, or battery
+  state. Supports 200+ EV chargers (wallboxes), 100+ vehicles, and 50+ solar
+  inverters/battery systems.
+
+
+  After installing, copy joeri-store-evcc/evcc.yaml.example to this app's data
+  directory as evcc.yaml and edit it for your hardware before starting the
+  app, or configure everything from the web UI's setup wizard on first run.
+developer: EVCC Contributors
+website: https://evcc.io
+icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
+gallery:
+  - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
+releaseNotes: >-
+  Initial release of EVCC in the Joeri Store.
+dependencies: []
+repo: https://github.com/evcc-io/evcc
+support: https://github.com/evcc-io/evcc/discussions
+port: 7070
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false

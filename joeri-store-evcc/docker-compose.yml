@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+
+  app_proxy:
+    environment:
+      # Format: <app-id>_<docker-service-name>_1
+      APP_HOST: joeri-store-evcc_web_1
+      APP_PORT: 7070
+
+  web:
+    image: evcc/evcc:0.316.0
+    restart: on-failure
+    command: ["evcc", "--config", "/etc/evcc.yaml"]
+    volumes:
+      - ${APP_DATA_DIR}/data/evcc.yaml:/etc/evcc.yaml
+      - ${APP_DATA_DIR}/data:/root/.evcc

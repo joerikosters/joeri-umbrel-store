@@ -1,0 +1,2 @@
+id: "joeri-store" # Unique ID for this app store. Contains only lowercase letters and dashes.
+name: "Joeri Store" # Display name. Shows up in the UI as "<name> App Store".
