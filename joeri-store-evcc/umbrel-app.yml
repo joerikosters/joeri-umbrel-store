@@ -21,7 +21,10 @@ icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
 releaseNotes: >-
-  Initial release of EVCC in the Joeri Store.
+  Fixed a bug where evcc.yaml could be auto-created as a directory by
+  Docker on first install, causing a "read /etc/evcc.yaml: is a directory"
+  startup error. The data directory is now mounted as a whole instead of
+  bind-mounting the config file directly.
 dependencies: []
 repo: https://github.com/evcc-io/evcc
 support: https://github.com/evcc-io/evcc/discussions

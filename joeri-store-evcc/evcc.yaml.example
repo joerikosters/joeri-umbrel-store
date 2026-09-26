@@ -2,9 +2,10 @@
 #
 # Before starting the app for the first time on Umbrel, this file needs to
 # exist at <app data dir>/data/evcc.yaml (the docker-compose.yml in this
-# folder mounts it to /etc/evcc.yaml inside the container). Copy this
-# example there and edit it for your own hardware, or just start the app
-# and use its web UI setup wizard instead — either works.
+# folder mounts the whole data dir to /data inside the container, and evcc
+# is started with --config /data/evcc.yaml). Copy this example there and
+# edit it for your own hardware, or just start the app and use its web UI
+# setup wizard instead — either works.
 #
 # Full reference: https://docs.evcc.io/docs/reference/configuration/
 
@@ -22,7 +23,7 @@ interval: 30s
 # Database for statistics (mounted volume, persists across restarts)
 database:
   type: sqlite
-  dsn: /root/.evcc/evcc.db
+  dsn: /data/evcc.db
 
 # MQTT broker (optional, e.g. for TeslaMate integration)
 # mqtt:
