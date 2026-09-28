@@ -2,7 +2,7 @@ manifestVersion: 1
 id: joeri-store-evcc
 name: EVCC
 category: vehicles
-version: "0.316.0-2"
+version: "0.316.0-3"
 tagline: EV charge controller & solar charging optimizer
 description: >-
   EVCC is an open-source EV charge controller and energy management system.
@@ -27,10 +27,9 @@ icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
 releaseNotes: >-
-  Switched to host networking so SMA, KEBA and EEBus device discovery work,
-  and so every port evcc needs (OCPP, Modbus, etc.) is reachable without
-  manual port publishing. The app now auto-creates a working default
-  evcc.yaml on first start instead of crashing when none exists.
+  Fixed first-boot config creation not actually running (it depended on a
+  bind-mounted sibling file that wasn't present at runtime). The default
+  config is now embedded directly in the startup command instead.
 dependencies: []
 repo: https://github.com/evcc-io/evcc
 support: https://github.com/evcc-io/evcc/discussions

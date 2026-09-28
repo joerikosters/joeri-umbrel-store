@@ -12,13 +12,30 @@ services:
     # This app is therefore not proxied through Umbrel's app_proxy: reach it
     # directly at http://umbrel.local:7070 (no Tor/.onion, no auto-HTTPS).
     network_mode: host
-    # If /data/evcc.yaml doesn't exist yet (fresh install), seed it from the
-    # bundled default instead of failing to boot. Never overwrites an
-    # existing, user-edited config.
+    # If /data/evcc.yaml doesn't exist yet (fresh install), write a minimal
+    # device-free default so the app boots instead of crashing, then hand
+    # off to evcc's own setup wizard. Never overwrites an existing config.
+    # The default is embedded here (not a bind-mounted sibling file) so it
+    # doesn't depend on how the community app store lays out files on disk.
     command:
       - sh
       - -c
-      - "[ -f /data/evcc.yaml ] || cp /defaults/evcc.yaml /data/evcc.yaml; exec evcc --config /data/evcc.yaml"
+      - |
+        if [ ! -f /data/evcc.yaml ]; then
+        cat > /data/evcc.yaml <<'YAML'
+        network:
+          schema: http
+          host: 0.0.0.0
+          port: 7070
+        log: info
+        interval: 30s
+        database:
+          type: sqlite
+          dsn: /data/evcc.db
+        site:
+          title: My Home
+        YAML
+        fi
+        exec evcc --config /data/evcc.yaml
     volumes:
       - ${APP_DATA_DIR}/data:/data
-      - ./evcc.default.yaml:/defaults/evcc.yaml:ro
