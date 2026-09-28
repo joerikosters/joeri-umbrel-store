@@ -1,19 +1,24 @@
 version: "3.7"
 
 services:
-
-  app_proxy:
-    environment:
-      # Format: <app-id>_<docker-service-name>_1
-      APP_HOST: joeri-store-evcc_web_1
-      APP_PORT: 7070
-
   web:
     image: evcc/evcc:0.316.0
     restart: on-failure
-    # Mounting the whole data dir (rather than bind-mounting evcc.yaml
-    # directly) avoids Docker auto-creating evcc.yaml as a directory when
-    # the file doesn't exist yet on first install.
-    command: ["evcc", "--config", "/data/evcc.yaml"]
+    # network_mode: host is required for evcc's SMA Sunny Home Manager
+    # (multicast), KEBA (UDP broadcast) and EEBus discovery to work at all —
+    # none of these survive Docker's bridge-network NAT. As a side effect,
+    # every port evcc binds (OCPP 8887, Modbus 8899/50502/51502, etc.) is
+    # reachable directly on the Umbrel's own IP with no per-port publishing.
+    # This app is therefore not proxied through Umbrel's app_proxy: reach it
+    # directly at http://umbrel.local:7070 (no Tor/.onion, no auto-HTTPS).
+    network_mode: host
+    # If /data/evcc.yaml doesn't exist yet (fresh install), seed it from the
+    # bundled default instead of failing to boot. Never overwrites an
+    # existing, user-edited config.
+    command:
+      - sh
+      - -c
+      - "[ -f /data/evcc.yaml ] || cp /defaults/evcc.yaml /data/evcc.yaml; exec evcc --config /data/evcc.yaml"
     volumes:
       - ${APP_DATA_DIR}/data:/data
+      - ./evcc.default.yaml:/defaults/evcc.yaml:ro

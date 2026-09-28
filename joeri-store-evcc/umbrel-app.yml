@@ -2,7 +2,7 @@ manifestVersion: 1
 id: joeri-store-evcc
 name: EVCC
 category: vehicles
-version: "0.316.0"
+version: "0.316.0-2"
 tagline: EV charge controller & solar charging optimizer
 description: >-
   EVCC is an open-source EV charge controller and energy management system.
@@ -12,19 +12,25 @@ description: >-
   inverters/battery systems.
 
 
-  After installing, copy joeri-store-evcc/evcc.yaml.example to this app's data
-  directory as evcc.yaml and edit it for your hardware before starting the
-  app, or configure everything from the web UI's setup wizard on first run.
+  This app runs in host networking mode, which SMA, KEBA and EEBus device
+  discovery require to work at all in Docker. That means it is not proxied
+  through Umbrel's dashboard the way most apps are: open it directly at
+  http://umbrel.local:7070 (no Tor/.onion, no automatic HTTPS for this app).
+
+
+  A minimal config is created automatically on first start — use evcc's own
+  web UI setup wizard to add your meter, charger and vehicle, or edit
+  evcc.yaml directly in this app's data directory.
 developer: EVCC Contributors
 website: https://evcc.io
 icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
 releaseNotes: >-
-  Fixed a bug where evcc.yaml could be auto-created as a directory by
-  Docker on first install, causing a "read /etc/evcc.yaml: is a directory"
-  startup error. The data directory is now mounted as a whole instead of
-  bind-mounting the config file directly.
+  Switched to host networking so SMA, KEBA and EEBus device discovery work,
+  and so every port evcc needs (OCPP, Modbus, etc.) is reachable without
+  manual port publishing. The app now auto-creates a working default
+  evcc.yaml on first start instead of crashing when none exists.
 dependencies: []
 repo: https://github.com/evcc-io/evcc
 support: https://github.com/evcc-io/evcc/discussions

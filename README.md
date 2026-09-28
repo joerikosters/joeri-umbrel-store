@@ -5,7 +5,8 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
 ## Apps
 
 - **[EVCC](joeri-store-evcc)** — open-source EV charge controller & solar
-  charging optimizer.
+  charging optimizer. Runs in host networking mode (see its own notes below);
+  reachable at `http://umbrel.local:7070`, not through the dashboard proxy.
 
 ## Using this store on umbrelOS
 
@@ -29,6 +30,10 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
   the `id` in `umbrel-app-store.yml`.
 - `${APP_DATA_DIR}` and `${APP_PORT}` are supplied by umbrelOS at runtime —
   don't set them yourself.
-- The `app_proxy` service in each `docker-compose.yml` is what makes the app
-  reachable through the Umbrel dashboard (and Tor); point its `APP_HOST` at
-  `<app-id>_<compose-service-name>_1`.
+- Most apps should include an `app_proxy` service in `docker-compose.yml` —
+  that's what makes them reachable through the Umbrel dashboard (and Tor);
+  point its `APP_HOST` at `<app-id>_<compose-service-name>_1`. Apps that need
+  raw LAN access (multicast/broadcast discovery, arbitrary inbound ports) use
+  `network_mode: host` instead and skip `app_proxy` entirely — see
+  `joeri-store-evcc` for an example. Host-networked apps are reached directly
+  at `http://umbrel.local:<port>`, with no Tor/.onion or auto-HTTPS.
