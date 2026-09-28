@@ -1,0 +1,49 @@
+manifestVersion: 1
+id: joeri-store-scrypted
+name: Scrypted
+category: automation
+version: "0.147.0"
+tagline: Camera NVR & HomeKit / smart home video integration platform
+description: >-
+  Scrypted is a high-performance video integration and home automation
+  platform. It connects IP cameras (ONVIF, RTSP, and many camera-brand
+  specific plugins) to smart home ecosystems like Apple HomeKit, Google
+  Home, and Home Assistant, and can record footage via its NVR plugin.
+
+
+  This install has hardware-accelerated transcoding enabled via the Intel
+  iGPU (QuickSync). NVR recording is not configured — this is a live
+  viewing / smart home integration setup only. Recording can be turned on
+  later from within the app, but needs its own storage volume added to
+  docker-compose.yml first (recordings use disk space fast).
+
+
+  This app runs in host networking mode, which HomeKit's mDNS advertisement
+  and dynamic accessory ports require. That means it is not proxied through
+  Umbrel's dashboard the way most apps are: open it directly at
+  https://umbrel.local:10443 (self-signed certificate — your browser will
+  warn once, then let you continue).
+
+
+  HomeKit note: umbrelOS runs its own avahi-daemon for umbrel.local
+  resolution, which also wants UDP port 5353. Scrypted's HomeKit plugin may
+  or may not be able to advertise itself alongside it, depending on the
+  host's mDNS setup. If HomeKit accessories don't appear in the Home app,
+  this is the likely cause — there isn't a fully clean fix without touching
+  umbrelOS's own avahi-daemon, which is not recommended.
+developer: Scrypted
+website: https://www.scrypted.app
+icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/scrypted.png
+gallery:
+  - https://image.thum.io/get/width/1280/noanimate/https://www.scrypted.app
+releaseNotes: >-
+  Initial release of Scrypted in the Joeri Store. Host networking, Intel
+  iGPU passthrough, HomeKit enabled, NVR recording not configured.
+dependencies: []
+repo: https://github.com/koush/scrypted
+support: https://github.com/koush/scrypted/discussions
+port: 10443
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
