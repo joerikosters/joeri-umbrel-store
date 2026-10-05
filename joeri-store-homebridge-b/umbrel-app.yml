@@ -34,6 +34,7 @@ description: >-
   depends on umbrelOS's avahi-daemon exposing that socket.
 developer: Homebridge
 website: https://homebridge.io/
+icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homebridge.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://homebridge.io
 dependencies: []
