@@ -20,7 +20,9 @@ description: >-
   This app runs in host networking mode, which HomeKit's mDNS advertisement
   and dynamic accessory ports require. That means it is not proxied through
   Umbrel's dashboard the way most apps are: open it directly at
-  http://umbrel.local:8581.
+  http://umbrel.local:8591 (moved off Homebridge's default UI port 8581, via
+  HOMEBRIDGE_CONFIG_UI_PORT, so it never collides with a stock Homebridge
+  install on the same host network).
 
 
   Known caveat: each instance runs its own bundled Avahi (mDNS) daemon
@@ -39,7 +41,7 @@ gallery:
 dependencies: []
 repo: https://github.com/homebridge/homebridge
 support: https://github.com/homebridge/homebridge/issues
-port: 8581
+port: 8591
 path: ""
 defaultUsername: ""
 defaultPassword: ""
@@ -50,6 +52,7 @@ releaseNotes: >-
   Initial release in the Joeri Store: a renamed clone of the official
   Homebridge app, as "Homebridge A" — one of two independent instances
   meant to run side by side (see "Homebridge B"). Same image/version as
-  upstream. UI stays on the default port 8581.
+  upstream. UI moved to port 8591 (via HOMEBRIDGE_CONFIG_UI_PORT) so
+  neither instance sits on Homebridge's default port 8581.
 submitter: Joeri Store
 submission: ""

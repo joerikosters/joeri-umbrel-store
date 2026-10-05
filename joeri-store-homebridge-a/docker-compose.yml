@@ -5,9 +5,13 @@ services:
     image: homebridge/homebridge:2026-09-25@sha256:22cdfca31934661ef9aaaa2e3fa74daa84a803fbf4c4a6c38c6bc1460b9f0596
     # container runs as root
     network_mode: host
-    # available at port 8581 (default, unchanged — see joeri-store-homebridge-b
-    # for the second instance, which moves its UI to 8582 to avoid colliding
-    # with this one on the shared host network)
+    environment:
+      # Moves the Homebridge UI off the image's default port 8581, so this
+      # instance never collides with a stock Homebridge install on the same
+      # host network. See joeri-store-homebridge-b for the second instance,
+      # which uses 8592.
+      - HOMEBRIDGE_CONFIG_UI_PORT=8591
+    # available at port 8591 (see environment above)
     volumes:
       - ${APP_DATA_DIR}/data/homebridge:/homebridge
     restart: on-failure

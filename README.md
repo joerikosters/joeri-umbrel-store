@@ -10,10 +10,12 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
 - **[Homebridge A](joeri-store-homebridge-a)** / **[Homebridge B](joeri-store-homebridge-b)**
   — two independent clones of the official Homebridge app, for running two
   separate HomeKit bridges on the same Umbrel. Both host networking;
-  Homebridge A at `http://umbrel.local:8581` (default), Homebridge B at
-  `http://umbrel.local:8582` (moved via `HOMEBRIDGE_CONFIG_UI_PORT` to avoid
-  colliding with A). See their umbrel-app.yml descriptions for an
-  mDNS/avahi caveat when running two HomeKit bridges host-networked at once.
+  Homebridge A at `http://umbrel.local:8591`, Homebridge B at
+  `http://umbrel.local:8592` (both moved off Homebridge's default UI port
+  8581 via `HOMEBRIDGE_CONFIG_UI_PORT`, so neither collides with the other
+  or with a stock Homebridge install). See their umbrel-app.yml
+  descriptions for an mDNS/avahi caveat when running two HomeKit bridges
+  host-networked at once.
 
 ## Using this store on umbrelOS
 
