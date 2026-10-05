@@ -7,10 +7,6 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
 - **[EVCC](joeri-store-evcc)** — open-source EV charge controller & solar
   charging optimizer. Runs in host networking mode (see its own notes below);
   reachable at `http://umbrel.local:7070`, not through the dashboard proxy.
-- **[Scrypted](joeri-store-scrypted)** — camera NVR & HomeKit/smart home
-  video integration platform. Also host networking; HTTPS-only UI (self-
-  signed cert) at `https://umbrel.local:10443`. See its umbrel-app.yml
-  description for a HomeKit/avahi caveat specific to umbrelOS.
 - **[Homebridge A](joeri-store-homebridge-a)** / **[Homebridge B](joeri-store-homebridge-b)**
   — two independent clones of the official Homebridge app, for running two
   separate HomeKit bridges on the same Umbrel. Both host networking;
