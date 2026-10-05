@@ -33,6 +33,8 @@ description: >-
   depends on umbrelOS's avahi-daemon exposing that socket.
 developer: Homebridge
 website: https://homebridge.io/
+gallery:
+  - https://image.thum.io/get/width/1280/noanimate/https://homebridge.io
 dependencies: []
 repo: https://github.com/homebridge/homebridge
 support: https://github.com/homebridge/homebridge/issues
