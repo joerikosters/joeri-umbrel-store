@@ -1,0 +1,54 @@
+manifestVersion: 1
+id: joeri-store-homebridge-b
+storage:
+  dataRoot: data
+category: automation
+name: Homebridge B
+version: "2.4.0-2026-09-25"
+tagline: "HomeKit support for the impatient"
+description: >-
+  Bringing HomeKit support where there is none. Homebridge allows you to integrate with smart home devices that do not natively support HomeKit.
+  There are over 2000 Homebridge plugins supporting thousands of different smart accessories.
+
+
+  This is "Homebridge B", one of two independent Homebridge instances in the
+  Joeri Store (the other is "Homebridge A"), for running two separate
+  HomeKit bridges on the same Umbrel — e.g. to split accessories into two
+  homes/bridges, or to isolate a flaky plugin from the rest.
+
+
+  This app runs in host networking mode, which HomeKit's mDNS advertisement
+  and dynamic accessory ports require. That means it is not proxied through
+  Umbrel's dashboard the way most apps are: open it directly at
+  http://umbrel.local:8582 (note the non-default port — it's moved off 8581
+  so it doesn't collide with Homebridge A on the shared host network).
+
+
+  Known caveat: each instance runs its own bundled Avahi (mDNS) daemon
+  inside its container, alongside umbrelOS's own avahi-daemon on the host —
+  all competing for UDP port 5353 in the shared host network namespace. With
+  two Homebridge instances plus umbrelOS itself, HomeKit discovery for one
+  or both bridges may be flaky. If that happens, see the docker-homebridge
+  docs for disabling the bundled Avahi (ENABLE_AVAHI=0) and mounting the
+  host's D-Bus/Avahi socket instead — not pre-configured here since it
+  depends on umbrelOS's avahi-daemon exposing that socket.
+developer: Homebridge
+website: https://homebridge.io/
+dependencies: []
+repo: https://github.com/homebridge/homebridge
+support: https://github.com/homebridge/homebridge/issues
+port: 8582
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+permissions:
+  - GPU
+releaseNotes: >-
+  Initial release in the Joeri Store: a renamed clone of the official
+  Homebridge app, as "Homebridge B" — one of two independent instances
+  meant to run side by side (see "Homebridge A"). Same image/version as
+  upstream. UI moved to port 8582 (via HOMEBRIDGE_CONFIG_UI_PORT) to avoid
+  colliding with Homebridge A's default 8581 on the shared host network.
+submitter: Joeri Store
+submission: ""
