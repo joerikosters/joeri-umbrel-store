@@ -38,19 +38,35 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
 ## Automated update checker
 
 A scheduled GitHub Action (`.github/workflows/update-apps.yml`, daily at
-06:00 UTC, or run manually via the Actions tab) checks each app listed in
-`.github/scripts/update_apps.py` for a newer stable upstream image tag. If
-one is found, it bumps `image:` in `docker-compose.yml` and
-`version`/`releaseNotes` in `umbrel-app.yml`, and commits + pushes directly
-to `main` as `github-actions[bot]`.
+06:00 UTC, or run manually via the Actions tab) keeps each app listed in
+`.github/scripts/update_apps.py` in sync with its upstream source, using
+one of two strategies per app:
 
-This still leaves apps pinned to a specific tag (and digest, for apps that
-pin one) — it does **not** use `image:latest` + `pull_policy: always`. The
-bot keeps the pin current automatically; Umbrel's own "Update available" →
-click flow still applies the actual change, so you keep version pinning,
-rollback, and a visible update step. The releaseNotes text the bot writes
-is generated, not reviewed — treat it as a pointer to go check the
-project's own release notes, not a substitute for them.
+- **`dockerhub_tag`** (used by `joeri-store-evcc`): checks Docker Hub
+  directly for a newer stable release tag of the pinned image, and bumps
+  `image:` in `docker-compose.yml` plus `version`/`releaseNotes` in
+  `umbrel-app.yml` to match.
+- **`official_clone`** (used by `joeri-store-homebridge-a`/`-b`): whenever
+  the official Homebridge app's `version` changes in
+  [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps), re-clones
+  its `umbrel-app.yml`/`docker-compose.yml` wholesale — carrying over
+  upstream's description, releaseNotes, permissions, volumes, etc. — then
+  reapplies this store's own overrides on top: `id`, `name`, `port`, `icon`
+  and `gallery` (upstream's gallery references files that only exist under
+  the official app id), a `HOMEBRIDGE_CONFIG_UI_PORT` environment var for
+  the port change, and an extra description/releaseNotes paragraph about
+  running two instances. Use this strategy for any future app that's meant
+  to track an official Umbrel app's updates under a renamed/customized
+  clone.
+
+Either way, apps stay pinned to a specific tag (and digest, for apps that
+pin one) — this does **not** use `image:latest` + `pull_policy: always`.
+The bot keeps the pin current automatically; Umbrel's own "Update
+available" → click flow still applies the actual change, so you keep
+version pinning, rollback, and a visible update step. The releaseNotes text
+the bot writes (or re-wraps, for `official_clone`) is generated/relayed,
+not reviewed — treat it as a pointer to go check the project's own release
+notes, not a substitute for them.
 
 ## Notes
 
