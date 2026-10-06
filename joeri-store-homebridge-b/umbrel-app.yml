@@ -4,7 +4,7 @@ storage:
   dataRoot: data
 category: automation
 name: Homebridge B
-version: "2.4.0-2026-09-25-2"
+version: "2.4.0-2026-09-25"
 tagline: "HomeKit support for the impatient"
 description: >-
   Bringing HomeKit support where there is none. Homebridge allows you to integrate with smart home devices that do not natively support HomeKit.
@@ -50,19 +50,10 @@ torOnly: false
 permissions:
   - GPU
 releaseNotes: >-
-  Switched the image to the `latest` tag with `pull_policy: always`, so
-  this app now tracks Homebridge's latest release automatically on every
-  (re)start instead of a pinned version. This means future Homebridge
-  releases will no longer show up as an "Update" in Umbrel — they apply
-  silently on the next restart. Trade-off: no more version pinning,
-  rollback, or release notes for Homebridge itself; a bad upstream release
-  (including a major version bump) could change behavior without warning.
-
-
   Initial release in the Joeri Store: a renamed clone of the official
   Homebridge app, as "Homebridge B" — one of two independent instances
-  meant to run side by side (see "Homebridge A"). UI moved to port 8592
-  (via HOMEBRIDGE_CONFIG_UI_PORT) so neither instance sits on Homebridge's
-  default port 8581.
+  meant to run side by side (see "Homebridge A"). Same image/version as
+  upstream. UI moved to port 8592 (via HOMEBRIDGE_CONFIG_UI_PORT) so
+  neither instance sits on Homebridge's default port 8581.
 submitter: Joeri Store
 submission: ""

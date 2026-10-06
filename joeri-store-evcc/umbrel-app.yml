@@ -2,7 +2,7 @@ manifestVersion: 1
 id: joeri-store-evcc
 name: EVCC
 category: vehicles
-version: "0.316.0-4"
+version: "0.316.0-3"
 tagline: EV charge controller & solar charging optimizer
 description: >-
   EVCC is an open-source EV charge controller and energy management system.
@@ -27,18 +27,9 @@ icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
 releaseNotes: >-
-  Switched the image to the `latest` tag with `pull_policy: always`, so
-  this app now tracks evcc's latest release automatically on every
-  (re)start instead of a pinned version. This means future evcc releases
-  will no longer show up as an "Update" in Umbrel — they apply silently on
-  the next restart. Trade-off: no more version pinning, rollback, or
-  release notes for evcc itself; a bad upstream release could change
-  behavior without warning.
-
-
-  Also fixed first-boot config creation not actually running (it depended
-  on a bind-mounted sibling file that wasn't present at runtime). The
-  default config is now embedded directly in the startup command instead.
+  Fixed first-boot config creation not actually running (it depended on a
+  bind-mounted sibling file that wasn't present at runtime). The default
+  config is now embedded directly in the startup command instead.
 dependencies: []
 repo: https://github.com/evcc-io/evcc
 support: https://github.com/evcc-io/evcc/discussions

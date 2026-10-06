@@ -33,22 +33,6 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
    line to `releaseNotes`.
 4. Commit and push. Umbrel checks the store's git repo for updates.
 
-## Image tagging: `latest` + `pull_policy: always`
-
-Every app in this store pins its image to the `latest` tag with
-`pull_policy: always` in `docker-compose.yml`, instead of a pinned
-version/digest. This means Docker re-pulls the newest image on every
-(re)start, so apps track upstream releases automatically — no more clicking
-"Update" in Umbrel for routine upstream releases.
-
-Trade-off, deliberately accepted: no version pinning, no rollback, and no
-per-release release notes for the upstream project itself — a bad upstream
-release (including a breaking major version bump) can change an app's
-behavior with no warning, on any restart (including an Umbrel reboot).
-`version`/`releaseNotes` in `umbrel-app.yml` are still bumped for changes
-made *in this store* (port changes, compose fixes, etc.), just not for every
-upstream release anymore.
-
 ## Notes
 
 - Every app id in this store must be prefixed with `joeri-store-`, matching

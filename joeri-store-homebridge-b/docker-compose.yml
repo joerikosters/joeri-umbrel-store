@@ -2,12 +2,7 @@ version: "3.7"
 
 services:
   server:
-    image: homebridge/homebridge:latest
-    # Always re-pull on (re)start so this tracks Homebridge's latest release
-    # instead of a pinned version — see the Joeri Store README for the
-    # tradeoff (no more manual Umbrel "Update" step, but also no pinning,
-    # rollback, or release notes).
-    pull_policy: always
+    image: homebridge/homebridge:2026-09-25@sha256:22cdfca31934661ef9aaaa2e3fa74daa84a803fbf4c4a6c38c6bc1460b9f0596
     # container runs as root
     network_mode: host
     environment:
