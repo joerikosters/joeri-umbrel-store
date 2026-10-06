@@ -32,6 +32,25 @@ A [Community App Store](https://github.com/getumbrel/umbrel-community-app-store)
 3. Bump `version` in `umbrel-app.yml` whenever you update the app, and add a
    line to `releaseNotes`.
 4. Commit and push. Umbrel checks the store's git repo for updates.
+5. To have new upstream releases bumped automatically instead of by hand,
+   add the app to `APPS` in `.github/scripts/update_apps.py` (see below).
+
+## Automated update checker
+
+A scheduled GitHub Action (`.github/workflows/update-apps.yml`, daily at
+06:00 UTC, or run manually via the Actions tab) checks each app listed in
+`.github/scripts/update_apps.py` for a newer stable upstream image tag. If
+one is found, it bumps `image:` in `docker-compose.yml` and
+`version`/`releaseNotes` in `umbrel-app.yml`, and commits + pushes directly
+to `main` as `github-actions[bot]`.
+
+This still leaves apps pinned to a specific tag (and digest, for apps that
+pin one) — it does **not** use `image:latest` + `pull_policy: always`. The
+bot keeps the pin current automatically; Umbrel's own "Update available" →
+click flow still applies the actual change, so you keep version pinning,
+rollback, and a visible update step. The releaseNotes text the bot writes
+is generated, not reviewed — treat it as a pointer to go check the
+project's own release notes, not a substitute for them.
 
 ## Notes
 
