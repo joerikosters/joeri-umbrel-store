@@ -2,7 +2,12 @@ version: "3.7"
 
 services:
   web:
-    image: evcc/evcc:0.316.0
+    image: evcc/evcc:latest
+    # Always re-pull on (re)start so this tracks evcc's latest release
+    # instead of a pinned version — see the Joeri Store README for the
+    # tradeoff (no more manual Umbrel "Update" step, but also no pinning,
+    # rollback, or release notes).
+    pull_policy: always
     restart: on-failure
     # network_mode: host is required for evcc's SMA Sunny Home Manager
     # (multicast), KEBA (UDP broadcast) and EEBus discovery to work at all —
