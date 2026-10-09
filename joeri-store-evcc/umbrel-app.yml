@@ -2,7 +2,7 @@ manifestVersion: 1
 id: joeri-store-evcc
 name: EVCC
 category: vehicles
-version: "0.316.2"
+version: "0.317.0"
 tagline: EV charge controller & solar charging optimizer
 description: >-
   EVCC is an open-source EV charge controller and energy management system.
@@ -27,7 +27,7 @@ icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/evcc.png
 gallery:
   - https://image.thum.io/get/width/1280/noanimate/https://evcc.io
 releaseNotes: >-
-  Automated update: bumped evcc/evcc to upstream release `0.316.2`, applied
+  Automated update: bumped evcc/evcc to upstream release `0.317.0`, applied
   by this store's scheduled GitHub Action. Check the project's own release
   notes before relying on new behavior — this note is generated, not
   reviewed.
