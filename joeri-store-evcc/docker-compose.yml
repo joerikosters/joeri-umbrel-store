@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   web:
-    image: evcc/evcc:0.317.0
+    image: evcc/evcc:0.317.1
     restart: on-failure
     # network_mode: host is required for evcc's SMA Sunny Home Manager
     # (multicast), KEBA (UDP broadcast) and EEBus discovery to work at all —
